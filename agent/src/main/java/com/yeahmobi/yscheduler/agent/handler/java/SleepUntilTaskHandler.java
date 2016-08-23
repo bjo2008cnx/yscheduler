@@ -1,16 +1,14 @@
 package com.yeahmobi.yscheduler.agent.handler.java;
 
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.lang.StringUtils;
-
 import com.yeahmobi.yscheduler.agent.handler.JavaTaskHandler;
 import com.yeahmobi.yscheduler.agentframework.agent.task.BaseTaskExecutor;
 import com.yeahmobi.yscheduler.agentframework.agent.task.TaskTransaction;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class SleepUntilTaskHandler extends BaseTaskExecutor implements JavaTaskHandler {
-
     private Map<String, String> params;
     private volatile boolean    cancelled = false;
 
