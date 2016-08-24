@@ -4,6 +4,8 @@
 package com.yeahmobi.yscheduler.agentframework.agent.event;
 
 /**
+ * 事件类型与事件处理器的映射
+ *
  * @author Leo.Liang
  */
 public interface EventMapper {

@@ -2,6 +2,7 @@ package com.yeahmobi.yscheduler.agentframework.agent.task;
 
 import java.util.Map;
 
+
 public abstract class AbstractAgentTask implements AgentTask {
 
     public static final String  PARAM_TASKNAME = "taskName";

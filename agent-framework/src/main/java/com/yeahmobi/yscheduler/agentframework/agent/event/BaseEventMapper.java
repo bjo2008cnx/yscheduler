@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 事件类型与事件处理器的映射
+ *
  * @author Leo.Liang
  */
 public class BaseEventMapper implements EventMapper {

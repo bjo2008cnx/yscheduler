@@ -3,25 +3,27 @@
  */
 package com.yeahmobi.yscheduler.agentframework.agent.event;
 
-import java.io.InputStream;
-import java.util.Properties;
-
+import com.yeahmobi.yscheduler.agentframework.exception.EventHandlerInitializeFailException;
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.yeahmobi.yscheduler.agentframework.exception.EventHandlerInitializeFailException;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * @author Leo.Liang
  */
 public class DefaultEventMapper extends BaseEventMapper {
 
-    private static final Logger log                     = LoggerFactory.getLogger(DefaultEventMapper.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultEventMapper.class);
     private static final String EVENT_MAPPING_FILE_NAME = "/event-handler.properties";
 
+    /**
+     * 初始化：将配置文件中的配置加载到EventMapper对象中
+     */
     public void init() {
         try {
             Properties eventMapping = readEventMapping();
@@ -33,20 +35,16 @@ public class DefaultEventMapper extends BaseEventMapper {
                         if (!this.handlers.containsKey(key)) {
                             Class<?> handlerClass = Class.forName(StringUtils.trim(handlerClassName));
                             if (EventHandler.class.isAssignableFrom(handlerClass)) {
-                                this.handlers.put(key,
-                                                  (EventHandler) ConstructorUtils.invokeConstructor(handlerClass, null));
+                                this.handlers.put(key, (EventHandler) ConstructorUtils.invokeConstructor(handlerClass, null));
                                 log.info("Register one event handler. Key={}, class={}", key, handlerClassName);
                             } else {
-                                log.error("Handler class {} with key {} doesn't implement EventHandler interface.",
-                                          handlerClassName, key);
-                                throw new EventHandlerInitializeFailException(
-                                                                              String.format("Handler class %s with key %s doesn't implement EventHandler interface.",
-                                                                                            handlerClassName, key));
+                                log.error("Handler class {} with key {} doesn't implement EventHandler interface.", handlerClassName, key);
+                                throw new EventHandlerInitializeFailException(String.format("Handler class %s with key %s doesn't implement EventHandler " +
+                                        "interface.", handlerClassName, key));
                             }
                         } else {
                             log.error("Handler({}) already existed.", key);
-                            throw new EventHandlerInitializeFailException(String.format("Handler(%s) already existed.",
-                                                                                        key));
+                            throw new EventHandlerInitializeFailException(String.format("Handler(%s) already existed.", key));
                         }
                     }
                 }
@@ -57,6 +55,11 @@ public class DefaultEventMapper extends BaseEventMapper {
         }
     }
 
+    /**
+     * 读配置文件
+     *
+     * @return
+     */
     private Properties readEventMapping() {
         Properties eventHandlerMapping = new Properties();
 

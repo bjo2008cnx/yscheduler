@@ -1,11 +1,11 @@
 package com.yeahmobi.yscheduler.agent;
 
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.webapp.WebAppContext;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.webapp.WebAppContext;
 
 /**
  * @author Ryan Sun
@@ -13,8 +13,16 @@ import org.mortbay.jetty.webapp.WebAppContext;
 
 public class AgentStart {
 
+    /**
+     * Jetty server
+     */
     private Server server;
 
+    /**
+     * 启动Jetty server
+     *
+     * @throws Exception
+     */
     public void startServer() throws Exception {
         this.server = new Server(24368);
         this.server.setStopAtShutdown(true);
@@ -30,6 +38,11 @@ public class AgentStart {
 
     }
 
+    /**
+     * 按任意键停止server
+     *
+     * @throws IOException
+     */
     protected void waitForAnyKey() throws IOException {
         String timestamp = new SimpleDateFormat("MM-dd HH:mm:ss.SSS").format(new Date());
 
