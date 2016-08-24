@@ -1,4 +1,4 @@
-package com.yeahmobi.yscheduler.agentframework.meta;
+package com.yeahmobi.yscheduler.agentframework.common;
 
 import java.io.IOException;
 

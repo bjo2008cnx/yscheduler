@@ -1,4 +1,4 @@
-package com.yeahmobi.yscheduler.agentframework.lock;
+package com.yeahmobi.yscheduler.agentframework.common;
 
 import java.util.concurrent.locks.ReentrantLock;
 

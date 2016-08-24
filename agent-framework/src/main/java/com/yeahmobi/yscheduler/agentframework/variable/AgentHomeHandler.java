@@ -1,6 +1,6 @@
 package com.yeahmobi.yscheduler.agentframework.variable;
 
-import com.yeahmobi.yscheduler.agentframework.meta.AgentMeta;
+import com.yeahmobi.yscheduler.agentframework.common.AgentMeta;
 import com.yeahmobi.yscheduler.common.variable.VariableContext;
 import com.yeahmobi.yscheduler.common.variable.VariableException;
 import com.yeahmobi.yscheduler.common.variable.VariableHandler;
