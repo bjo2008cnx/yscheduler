@@ -31,7 +31,7 @@ import com.yeahmobi.yscheduler.agentframework.AgentResponse;
 import com.yeahmobi.yscheduler.agentframework.AgentResponseCode;
 import com.yeahmobi.yscheduler.agentframework.agent.task.TaskLog;
 import com.yeahmobi.yscheduler.agentframework.agent.task.TaskStatus;
-import com.yeahmobi.yscheduler.agentframework.agent.task.TaskTransactionStatus;
+import com.yeahmobi.yscheduler.agentframework.agent.task.transaction.TaskTransactionStatus;
 import com.yeahmobi.yscheduler.agentframework.exception.AgentClientException;
 
 /**

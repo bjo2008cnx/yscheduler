@@ -2,8 +2,8 @@ package com.yeahmobi.yscheduler.agentframework.agent.event.task;
 
 import java.util.Map;
 
-import com.yeahmobi.yscheduler.agentframework.agent.event.HandlerResult;
-import com.yeahmobi.yscheduler.agentframework.agent.event.TaskExecutionEventHandler;
+import com.yeahmobi.yscheduler.agentframework.agent.event.handler.HandlerResult;
+import com.yeahmobi.yscheduler.agentframework.agent.event.handler.TaskExecutionEventHandler;
 
 /**
  * @author Leo.Liang

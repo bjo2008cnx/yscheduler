@@ -23,10 +23,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yeahmobi.yscheduler.agentframework.agent.event.task.CalloutTaskHolder.Pair;
-import com.yeahmobi.yscheduler.agentframework.agent.task.AgentTask;
-import com.yeahmobi.yscheduler.agentframework.agent.task.BaseTaskExecutor;
-import com.yeahmobi.yscheduler.agentframework.agent.task.TaskTransaction;
-import com.yeahmobi.yscheduler.agentframework.agent.task.TaskTransaction.Context;
+import com.yeahmobi.yscheduler.agentframework.agent.task.agenttask.AgentTask;
+import com.yeahmobi.yscheduler.agentframework.agent.task.executor.BaseTaskExecutor;
+import com.yeahmobi.yscheduler.agentframework.agent.task.transaction.TaskTransaction;
+import com.yeahmobi.yscheduler.agentframework.agent.task.transaction.TaskTransaction.Context;
 import com.yeahmobi.yscheduler.agentframework.exception.AgentClientException;
 
 /**

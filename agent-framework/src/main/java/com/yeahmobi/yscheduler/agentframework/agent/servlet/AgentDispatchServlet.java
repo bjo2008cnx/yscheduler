@@ -4,8 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.yeahmobi.yscheduler.agentframework.AgentRequest;
 import com.yeahmobi.yscheduler.agentframework.AgentResponse;
 import com.yeahmobi.yscheduler.agentframework.AgentResponseCode;
-import com.yeahmobi.yscheduler.agentframework.agent.event.*;
-import com.yeahmobi.yscheduler.agentframework.agent.event.common.PingEventHandler;
+import com.yeahmobi.yscheduler.agentframework.agent.event.handler.HandlerResult;
+import com.yeahmobi.yscheduler.agentframework.agent.event.handler.PingEventHandler;
+import com.yeahmobi.yscheduler.agentframework.agent.event.handler.EventHandler;
+import com.yeahmobi.yscheduler.agentframework.agent.event.mapper.DefaultEventMapper;
+import com.yeahmobi.yscheduler.agentframework.agent.event.mapper.EventMapper;
+import com.yeahmobi.yscheduler.agentframework.agent.event.mapper.EventMapperFactory;
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -19,16 +23,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * 任务执行通过http servlet方式？
+ *
  * @author Leo.Liang
  */
 public class AgentDispatchServlet extends HttpServlet {
 
-    private static final Logger log                                 = LoggerFactory.getLogger(AgentDispatchServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(AgentDispatchServlet.class);
 
     private static final String SERVLET_CONFIG_EVENT_MAPPER_FACTORY = "eventMapperFactory";
-    private static final String EVENT_TYPE_PING                     = "ping";
+    private static final String EVENT_TYPE_PING = "ping";
 
-    private EventMapper         eventMapper;
+    private EventMapper eventMapper;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -65,8 +71,7 @@ public class AgentDispatchServlet extends HttpServlet {
                 return ConstructorUtils.invokeConstructor(eventMapperFactoryClass, null);
             } catch (Throwable e) {
                 log.error("Fail to init EventMapperFactory({}).", eventMapperFactoryClassString);
-                throw new ServletException(String.format("Fail to init EventMapperFactory(%s).",
-                                                         eventMapperFactoryClassString));
+                throw new ServletException(String.format("Fail to init EventMapperFactory(%s).", eventMapperFactoryClassString));
             }
         }
         return null;
@@ -108,8 +113,7 @@ public class AgentDispatchServlet extends HttpServlet {
                 AgentRequest agentReq = AgentRequest.valueOf(req);
                 EventHandler handler = this.eventMapper.findHandler(agentReq.getEventType());
 
-                log.info("Reqeust access...(EventType={}, EventHandler={})", agentReq.getEventType(),
-                         handler == null ? "null" : handler.getClass().getName());
+                log.info("Reqeust access...(EventType={}, EventHandler={})", agentReq.getEventType(), handler == null ? "null" : handler.getClass().getName());
 
                 if (handler == null) {
                     agentRes.setResponseCode(AgentResponseCode.EVENT_NOT_SUPPORTED);

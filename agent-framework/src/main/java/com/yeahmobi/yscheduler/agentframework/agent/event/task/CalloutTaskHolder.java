@@ -3,7 +3,7 @@ package com.yeahmobi.yscheduler.agentframework.agent.event.task;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.yeahmobi.yscheduler.agentframework.agent.event.task.CalloutTaskExecutor.CalloutFutureTask;
-import com.yeahmobi.yscheduler.agentframework.agent.task.TaskTransaction;
+import com.yeahmobi.yscheduler.agentframework.agent.task.transaction.TaskTransaction;
 
 public class CalloutTaskHolder {
 
@@ -18,7 +18,7 @@ public class CalloutTaskHolder {
             this.task = task;
         }
 
-        TaskTransaction   tx;
+        TaskTransaction tx;
         CalloutFutureTask task;
 
         public TaskTransaction getTx() {

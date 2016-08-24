@@ -2,9 +2,9 @@ package com.yeahmobi.yscheduler.agentframework.agent.event.task;
 
 import java.util.Map;
 
-import com.yeahmobi.yscheduler.agentframework.agent.event.TaskSubmitionEventHandler;
-import com.yeahmobi.yscheduler.agentframework.agent.task.AgentTask;
-import com.yeahmobi.yscheduler.agentframework.agent.task.async.CalloutAgentTask;
+import com.yeahmobi.yscheduler.agentframework.agent.event.handler.TaskSubmitionEventHandler;
+import com.yeahmobi.yscheduler.agentframework.agent.task.agenttask.AgentTask;
+import com.yeahmobi.yscheduler.agentframework.agent.task.agenttask.CalloutAgentTask;
 
 /**
  * @author atell.wu

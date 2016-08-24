@@ -1,17 +1,17 @@
-package com.yeahmobi.yscheduler.agentframework.agent.task;
+package com.yeahmobi.yscheduler.agentframework.agent.task.agenttask;
 
 import java.util.Map;
 
 
 public abstract class AbstractAgentTask implements AgentTask {
 
-    public static final String  PARAM_TASKNAME = "taskName";
+    public static final String PARAM_TASKNAME = "taskName";
 
     private Map<String, String> params;
 
-    private String              taskName;
+    private String taskName;
 
-    private String              eventType;
+    private String eventType;
 
     public AbstractAgentTask(String eventType, Map<String, String> params) {
         super();
