@@ -24,24 +24,24 @@ public class FileBasedTaskTransaction<T extends AgentTask> implements TaskTransa
 
     private static final String CONTEXT_ENCODE = "UTF-8";
 
-    private static final Logger log            = LoggerFactory.getLogger(FileBasedTaskTransaction.class);
+    private static final Logger log = LoggerFactory.getLogger(FileBasedTaskTransaction.class);
 
     private static final String FILE_NAME_META = "tx.meta";
-    private static final String FILE_NAME_LOG  = "tx.log";
+    private static final String FILE_NAME_LOG = "tx.log";
 
-    private static final String DATE_FORMAT    = "yyyy-MM-dd HH:mm:ss";
-    private static final String META_ENCODING  = "utf-8";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String META_ENCODING = "utf-8";
 
-    private long                id;
-    private T                   task;
-    private File                baseDir;
-    private File                contextBaseDir;
-    private Meta                meta;
+    private long id;
+    private T task;
+    private File baseDir;
+    private File contextBaseDir;
+    private Meta meta;
 
-    private OutputStream        logOutputStream;
-    private boolean             cancelled;
+    private OutputStream logOutputStream;
+    private boolean cancelled;
 
-    private Context             context;
+    private Context context;
 
     public FileBasedTaskTransaction(long txId, T task, File baseDir) {
         this.id = txId;
@@ -106,6 +106,11 @@ public class FileBasedTaskTransaction<T extends AgentTask> implements TaskTransa
         }
     }
 
+    /**
+     * 成功后的处理
+     *
+     * @param returnValue
+     */
     private void endWithSuccess(Integer returnValue) {
         try {
             this.meta.setEnd(new Date());
@@ -118,6 +123,11 @@ public class FileBasedTaskTransaction<T extends AgentTask> implements TaskTransa
         }
     }
 
+    /**
+     * 取消后的处理
+     *
+     * @param returnValue
+     */
     private void endWithCancel(Integer returnValue) {
         try {
             this.meta.setStatus(TaskTransactionStatus.CANCEL);
@@ -240,8 +250,7 @@ public class FileBasedTaskTransaction<T extends AgentTask> implements TaskTransa
             this.meta = loadMeta();
             this.context = loadContext();
         } catch (Exception e) {
-            throw new TaskNotFoundException(String.format("Task with transaction id {%s} not found",
-                                                          String.valueOf(this.id)), e);
+            throw new TaskNotFoundException(String.format("Task with transaction id {%s} not found", String.valueOf(this.id)), e);
         }
     }
 

@@ -1,29 +1,25 @@
 package com.yeahmobi.yscheduler.condition;
 
-import java.util.List;
+import com.yeahmobi.yscheduler.model.*;
 
-import com.yeahmobi.yscheduler.model.Task;
-import com.yeahmobi.yscheduler.model.TaskInstance;
-import com.yeahmobi.yscheduler.model.Workflow;
-import com.yeahmobi.yscheduler.model.WorkflowDetail;
-import com.yeahmobi.yscheduler.model.WorkflowInstance;
+import java.util.List;
 
 public class ConditionContext {
 
-    private Workflow           workflow;
+    private Workflow workflow;
 
-    private WorkflowInstance   workflowInstance;
+    private WorkflowInstance workflowInstance;
 
-    private WorkflowDetail     workflowDetail;
+    private WorkflowDetail workflowDetail;
 
-    private Task               task;
+    private Task task;
 
-    private TaskInstance       taskInstance;
+    private TaskInstance taskInstance;
 
     private List<TaskInstance> dependencyTaskInstances;
 
-    public ConditionContext(Workflow workflow, WorkflowInstance workflowInstance, WorkflowDetail workflowDetail,
-                            Task task, TaskInstance taskInstance, List<TaskInstance> dependencyTaskInstances) {
+    public ConditionContext(Workflow workflow, WorkflowInstance workflowInstance, WorkflowDetail workflowDetail, Task task, TaskInstance taskInstance,
+                            List<TaskInstance> dependencyTaskInstances) {
         super();
         this.workflow = workflow;
         this.workflowInstance = workflowInstance;

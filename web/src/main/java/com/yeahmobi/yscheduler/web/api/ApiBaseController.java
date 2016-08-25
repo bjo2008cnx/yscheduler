@@ -8,7 +8,7 @@ import com.yeahmobi.yscheduler.web.common.HttpServletRequestMapWrapper;
 public class ApiBaseController {
 
     protected static final String REQ_KEY_APPKEY = "appKey";
-    protected static final String REQ_KEY_TOKEN  = "token";
+    protected static final String REQ_KEY_TOKEN = "token";
 
     protected String handleRequest(HttpServletRequestMapWrapper request, ApiHandler handler) {
         ApiResponse apiResponse = new ApiResponse();
@@ -54,7 +54,6 @@ public class ApiBaseController {
     }
 
     protected interface ApiHandler {
-
         public void handle(ApiRequest apiRequest, ApiResponse apiResponse) throws Exception;
     }
 }

@@ -28,20 +28,20 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class FileBasedTaskTransactionManager implements TaskTransactionManager {
 
-    private static final Logger      log               = LoggerFactory.getLogger(FileBasedTaskTransactionManager.class);
-    private File                     baseDir;
-    private String                   baseDirStr;
-    private TransactionIdGenerator   idGenerator;
-    private long                     preservedDay      = 2;
+    private static final Logger log = LoggerFactory.getLogger(FileBasedTaskTransactionManager.class);
+    private File baseDir;
+    private String baseDirStr;
+    private TransactionIdGenerator idGenerator;
+    private long preservedDay = 2;
     private ScheduledExecutorService cleanTaskExecutor = Executors.newScheduledThreadPool(1, new ThreadFactory() {
 
-                                                           public Thread newThread(Runnable r) {
-                                                               Thread t = new Thread(r);
-                                                               t.setDaemon(true);
-                                                               t.setName("Agent-CleanerThread");
-                                                               return t;
-                                                           }
-                                                       });
+        public Thread newThread(Runnable r) {
+            Thread t = new Thread(r);
+            t.setDaemon(true);
+            t.setName("Agent-CleanerThread");
+            return t;
+        }
+    });
 
     public void setBaseDir(String baseDirStr) {
         this.baseDirStr = baseDirStr;
@@ -58,21 +58,14 @@ public class FileBasedTaskTransactionManager implements TaskTransactionManager {
 
     @SuppressWarnings("unchecked")
     public TaskTransaction getTransaction(long transactionId) throws TaskNotFoundException {
-        FileBasedTaskTransaction tx = new FileBasedTaskTransaction(
-                                                                   transactionId,
-                                                                   null,
-                                                                   new File(this.baseDir, String.valueOf(transactionId)));
+        FileBasedTaskTransaction tx = new FileBasedTaskTransaction(transactionId, null, new File(this.baseDir, String.valueOf(transactionId)));
         tx.load();
         return tx;
     }
 
     @SuppressWarnings("unchecked")
-    public TaskTransaction getTransaction(long transactionId, AgentTask task) throws TaskTransactionCreationException,
-                                                                             TaskNotFoundException {
-        FileBasedTaskTransaction tx = new FileBasedTaskTransaction(
-                                                                   transactionId,
-                                                                   task,
-                                                                   new File(this.baseDir, String.valueOf(transactionId)));
+    public TaskTransaction getTransaction(long transactionId, AgentTask task) throws TaskTransactionCreationException, TaskNotFoundException {
+        FileBasedTaskTransaction tx = new FileBasedTaskTransaction(transactionId, task, new File(this.baseDir, String.valueOf(transactionId)));
         tx.load();
         return tx;
     }
@@ -84,8 +77,7 @@ public class FileBasedTaskTransactionManager implements TaskTransactionManager {
 
                 public void run() {
                     File[] files = FileBasedTaskTransactionManager.this.baseDir.listFiles();
-                    long lastPreservedTime = new Date().getTime()
-                                             - (FileBasedTaskTransactionManager.this.preservedDay * 24 * 60 * 60 * 1000L);
+                    long lastPreservedTime = new Date().getTime() - (FileBasedTaskTransactionManager.this.preservedDay * 24 * 60 * 60 * 1000L);
                     for (File file : files) {
                         if (file.isDirectory() && StringUtils.isNumeric(file.getName())) {
                             if (file.lastModified() < lastPreservedTime) {
@@ -111,8 +103,7 @@ public class FileBasedTaskTransactionManager implements TaskTransactionManager {
     @SuppressWarnings("unchecked")
     public TaskTransaction createTransaction(AgentTask task) throws TaskTransactionCreationException {
         long txId = this.idGenerator.nextId();
-        FileBasedTaskTransaction tx = new FileBasedTaskTransaction(txId, task, new File(this.baseDir,
-                                                                                        String.valueOf(txId)));
+        FileBasedTaskTransaction tx = new FileBasedTaskTransaction(txId, task, new File(this.baseDir, String.valueOf(txId)));
         tx.init();
         return tx;
     }
@@ -128,8 +119,7 @@ public class FileBasedTaskTransactionManager implements TaskTransactionManager {
                     list.add(tx);
                 }
             } catch (Exception e) {
-                log.error(String.format("Error when load transaction(txId=%s), skip this transaction.", file.getName()),
-                          e);
+                log.error(String.format("Error when load transaction(txId=%s), skip this transaction.", file.getName()), e);
             }
         }
         return list;
@@ -138,12 +128,12 @@ public class FileBasedTaskTransactionManager implements TaskTransactionManager {
     private static class TransactionIdGenerator {
 
         private static final String ID_STORAGE_FILE_NAME = "txid";
-        private static final int    FILE_SIZE            = 20;
-        private File                baseDir;
-        private File                idStorageFile;
-        private MappedByteBuffer    mbb;
-        private static final byte[] BUF_MASK             = new byte[FILE_SIZE];
-        private AtomicLong          currentId            = new AtomicLong(0);
+        private static final int FILE_SIZE = 20;
+        private File baseDir;
+        private File idStorageFile;
+        private MappedByteBuffer mbb;
+        private static final byte[] BUF_MASK = new byte[FILE_SIZE];
+        private AtomicLong currentId = new AtomicLong(0);
 
         public TransactionIdGenerator(File baseDir) {
             this.baseDir = baseDir;
@@ -183,13 +173,11 @@ public class FileBasedTaskTransactionManager implements TaskTransactionManager {
         private void ensureStorageExists() throws IOException {
             if (this.idStorageFile.exists()) {
                 if (this.idStorageFile.isDirectory()) {
-                    throw new IOException(String.format("File(%s) already exists, but not a file.",
-                                                        this.idStorageFile.getAbsolutePath()));
+                    throw new IOException(String.format("File(%s) already exists, but not a file.", this.idStorageFile.getAbsolutePath()));
                 }
             } else {
                 if (!this.idStorageFile.createNewFile()) {
-                    throw new IOException(String.format("Fail to create file(%s).",
-                                                        this.idStorageFile.getAbsolutePath()));
+                    throw new IOException(String.format("Fail to create file(%s).", this.idStorageFile.getAbsolutePath()));
                 }
             }
         }
