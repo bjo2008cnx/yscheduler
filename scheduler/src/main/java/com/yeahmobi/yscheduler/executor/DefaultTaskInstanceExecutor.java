@@ -1,25 +1,5 @@
-package com.yeahmobi.yscheduler.executor.impl;
+package com.yeahmobi.yscheduler.executor;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListSet;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.yeahmobi.yscheduler.executor.AttemptExecutor;
-import com.yeahmobi.yscheduler.executor.TaskInstanceExecutor;
 import com.yeahmobi.yscheduler.model.Attempt;
 import com.yeahmobi.yscheduler.model.Task;
 import com.yeahmobi.yscheduler.model.TaskInstance;
@@ -29,6 +9,22 @@ import com.yeahmobi.yscheduler.model.service.TaskService;
 import com.yeahmobi.yscheduler.model.type.AttemptStatus;
 import com.yeahmobi.yscheduler.model.type.TaskInstanceStatus;
 import com.yeahmobi.yscheduler.notice.NoticeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class DefaultTaskInstanceExecutor implements TaskInstanceExecutor {

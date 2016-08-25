@@ -1,15 +1,13 @@
-package com.yeahmobi.yscheduler.loadbalance.impl;
+package com.yeahmobi.yscheduler.loadbalance;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.yeahmobi.yscheduler.loadbalance.AgentLoadbalance;
 import com.yeahmobi.yscheduler.model.Agent;
 import com.yeahmobi.yscheduler.model.service.AgentService;
 import com.yeahmobi.yscheduler.monitor.ActiveAgentManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class RoundRobinAgentLoadbalance implements AgentLoadbalance {

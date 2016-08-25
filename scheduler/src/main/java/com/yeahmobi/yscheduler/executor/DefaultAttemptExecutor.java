@@ -1,4 +1,4 @@
-package com.yeahmobi.yscheduler.executor.impl;
+package com.yeahmobi.yscheduler.executor;
 
 import com.yeahmobi.yscheduler.agentframework.AgentRequest;
 import com.yeahmobi.yscheduler.agentframework.AgentResponse;
@@ -18,7 +18,6 @@ import com.yeahmobi.yscheduler.common.fileserver.FileServer;
 import com.yeahmobi.yscheduler.common.fileserver.FileServerException;
 import com.yeahmobi.yscheduler.common.variable.VariableException;
 import com.yeahmobi.yscheduler.common.variable.VariableManager;
-import com.yeahmobi.yscheduler.executor.AttemptExecutor;
 import com.yeahmobi.yscheduler.loadbalance.AgentLoadbalance;
 import com.yeahmobi.yscheduler.model.*;
 import com.yeahmobi.yscheduler.model.service.*;
