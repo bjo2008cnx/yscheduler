@@ -1,7 +1,12 @@
 package com.yeahmobi.yscheduler.model.service.impl;
 
-import java.util.List;
-
+import com.yeahmobi.yscheduler.common.Paginator;
+import com.yeahmobi.yscheduler.model.TeamWorkflowInstanceStatus;
+import com.yeahmobi.yscheduler.model.common.Query;
+import com.yeahmobi.yscheduler.model.service.TeamWorkflowStatusInstanceService;
+import com.yeahmobi.yscheduler.model.type.WorkflowInstanceStatus;
+import com.yeahmobi.yunit.DbUnitTestExecutionListener;
+import com.yeahmobi.yunit.annotation.DatabaseSetup;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,25 +16,19 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.yeahmobi.yscheduler.common.Paginator;
-import com.yeahmobi.yscheduler.model.TeamWorkflowInstanceStatus;
-import com.yeahmobi.yscheduler.model.common.Query;
-import com.yeahmobi.yscheduler.model.service.TeamWorkflowStatusInstanceService;
-import com.yeahmobi.yscheduler.model.type.WorkflowInstanceStatus;
-import com.yeahmobi.yunit.DbUnitTestExecutionListener;
-import com.yeahmobi.yunit.annotation.DatabaseSetup;
+import java.util.List;
 
 /**
  * atell.wu
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class TeamWorkflowInstanceStatusServiceImplTest {
 
-    private static final long                 WORKFLOW_ID      = 1L;
-    private static final int                  PLATFORM_USER_ID = 2;
-    private static final long                 PLATFORM_TEAM_ID = 2L;
+    private static final long WORKFLOW_ID = 1L;
+    private static final int PLATFORM_USER_ID = 2;
+    private static final long PLATFORM_TEAM_ID = 2L;
     @Autowired
     private TeamWorkflowStatusInstanceService workflowInstanceService;
 
@@ -52,8 +51,7 @@ public class TeamWorkflowInstanceStatusServiceImplTest {
         query.setWorkflowInstanceStatus(WorkflowInstanceStatus.RUNNING);
         long userId = PLATFORM_USER_ID;
         long workflowId = WORKFLOW_ID;
-        List<TeamWorkflowInstanceStatus> list = this.workflowInstanceService.list(query, userId, workflowId, 1,
-                                                                                  paginator);
+        List<TeamWorkflowInstanceStatus> list = this.workflowInstanceService.list(query, userId, workflowId, 1, paginator);
         Assert.assertEquals(10, list.size());
         list = this.workflowInstanceService.list(query, userId, workflowId, 2, paginator);
         Assert.assertEquals(1, list.size());
@@ -68,8 +66,7 @@ public class TeamWorkflowInstanceStatusServiceImplTest {
         query.setWorkflowInstanceStatus(WorkflowInstanceStatus.CANCELLED);
         long userId = PLATFORM_USER_ID;
         long workflowId = WORKFLOW_ID;
-        List<TeamWorkflowInstanceStatus> list = this.workflowInstanceService.list(query, userId, workflowId, 1,
-                                                                                  paginator);
+        List<TeamWorkflowInstanceStatus> list = this.workflowInstanceService.list(query, userId, workflowId, 1, paginator);
         Assert.assertEquals(0, list.size());
     }
 
@@ -89,8 +86,7 @@ public class TeamWorkflowInstanceStatusServiceImplTest {
             query.setWorkflowInstanceStatus(WorkflowInstanceStatus.RUNNING);
             long userId = PLATFORM_USER_ID;
             long workflowId = WORKFLOW_ID;
-            List<TeamWorkflowInstanceStatus> list = this.workflowInstanceService.list(query, userId, workflowId, 1,
-                                                                                      paginator);
+            List<TeamWorkflowInstanceStatus> list = this.workflowInstanceService.list(query, userId, workflowId, 1, paginator);
             Assert.assertEquals(10, list.size());
             list = this.workflowInstanceService.list(query, userId, workflowId, 2, paginator);
             Assert.assertEquals(2, list.size());
@@ -110,8 +106,7 @@ public class TeamWorkflowInstanceStatusServiceImplTest {
             query.setWorkflowInstanceStatus(WorkflowInstanceStatus.CANCELLED);
             long userId = PLATFORM_USER_ID;
             long workflowId = WORKFLOW_ID;
-            List<TeamWorkflowInstanceStatus> list = this.workflowInstanceService.list(query, userId, workflowId, 1,
-                                                                                      paginator);
+            List<TeamWorkflowInstanceStatus> list = this.workflowInstanceService.list(query, userId, workflowId, 1, paginator);
             Assert.assertEquals(1, list.size());
         }
     }

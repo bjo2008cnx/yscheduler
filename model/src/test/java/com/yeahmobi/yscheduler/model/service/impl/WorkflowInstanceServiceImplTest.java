@@ -32,17 +32,17 @@ import com.yeahmobi.yunit.annotation.DatabaseTearDown;
  * Ryan Sun
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class WorkflowInstanceServiceImplTest {
 
     @Autowired
-    private WorkflowInstanceService           workflowInstanceService;
+    private WorkflowInstanceService workflowInstanceService;
 
     @Autowired
     private TeamWorkflowStatusInstanceService teamWorkflowStatusInstanceService;
 
-    private static final SimpleDateFormat     sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private WorkflowInstance buildInstance() {
         WorkflowInstance instance = new WorkflowInstance();
@@ -70,7 +70,7 @@ public class WorkflowInstanceServiceImplTest {
     @DatabaseSetup
     @DatabaseTearDown(type = DatabaseOperation.DELETE_ALL)
     public void testListByIds() {
-        List<Long> ids = Lists.asList(1L, new Long[] { 2L });
+        List<Long> ids = Lists.asList(1L, new Long[]{2L});
         Assert.assertEquals(2, this.workflowInstanceService.list(ids).size());
     }
 
@@ -170,8 +170,7 @@ public class WorkflowInstanceServiceImplTest {
 
         // 验证common
         Paginator paginator = new Paginator();
-        List<TeamWorkflowInstanceStatus> list = this.teamWorkflowStatusInstanceService.list(new Query(), 2, 1, 1,
-                                                                                            paginator);
+        List<TeamWorkflowInstanceStatus> list = this.teamWorkflowStatusInstanceService.list(new Query(), 2, 1, 1, paginator);
         Assert.assertEquals(1, list.size());
     }
 

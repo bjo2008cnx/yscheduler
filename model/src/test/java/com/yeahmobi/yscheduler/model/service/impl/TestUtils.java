@@ -6,11 +6,11 @@ import java.util.Date;
 
 public class TestUtils {
 
-    private static final long             SECOND       = 1000;
+    private static final long SECOND = 1000;
 
-    private static final SimpleDateFormat sdf          = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    static Date                           DEFAULT_TIME = new Date();
+    static Date DEFAULT_TIME = new Date();
 
     static {
         try {

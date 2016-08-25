@@ -31,18 +31,18 @@ import com.yeahmobi.yunit.annotation.DatabaseSetup;
  * Ryan Sun
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class WorkflowServiceImplTest {
 
     @Autowired
-    private WorkflowService               workflowService;
+    private WorkflowService workflowService;
 
     @Autowired
-    private TaskService                   taskService;
+    private TaskService taskService;
 
     @Autowired
-    private WorkflowDetailService         workflowDetailService;
+    private WorkflowDetailService workflowDetailService;
 
     @Autowired
     private WorkflowTaskDependencyService workflowDependencyService;

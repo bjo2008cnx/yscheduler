@@ -1,10 +1,11 @@
 package com.yeahmobi.yscheduler.model.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
+import com.yeahmobi.yscheduler.common.Paginator;
+import com.yeahmobi.yscheduler.model.Attempt;
+import com.yeahmobi.yscheduler.model.service.AttemptService;
+import com.yeahmobi.yscheduler.model.type.AttemptStatus;
+import com.yeahmobi.yunit.DbUnitTestExecutionListener;
+import com.yeahmobi.yunit.annotation.DatabaseSetup;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,25 +15,23 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.yeahmobi.yscheduler.common.Paginator;
-import com.yeahmobi.yscheduler.model.Attempt;
-import com.yeahmobi.yscheduler.model.service.AttemptService;
-import com.yeahmobi.yscheduler.model.type.AttemptStatus;
-import com.yeahmobi.yunit.DbUnitTestExecutionListener;
-import com.yeahmobi.yunit.annotation.DatabaseSetup;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author atell
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class AttemptServiceImplTest {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
-    private AttemptService                attemptService;
+    private AttemptService attemptService;
 
     @Test
     @DatabaseSetup
@@ -116,10 +115,9 @@ public class AttemptServiceImplTest {
 
         Assert.assertNotNull(id);
         Attempt actual = this.attemptService.get(id);
-        assertAttempt(actual, id, attempt.getAgentId(), new Date(), attempt.getDuration(), attempt.getEndTime(),
-                      attempt.getInstanceId(), attempt.getOutput(), attempt.getReturnValue(), attempt.getStartTime(),
-                      attempt.getStatus(), attempt.getTaskId(), attempt.getTransactionId(), attempt.getUpdateTime(),
-                      true);
+        assertAttempt(actual, id, attempt.getAgentId(), new Date(), attempt.getDuration(), attempt.getEndTime(), attempt.getInstanceId(), attempt.getOutput()
+                , attempt.getReturnValue(), attempt.getStartTime(), attempt.getStatus(), attempt.getTaskId(), attempt.getTransactionId(), attempt
+                .getUpdateTime(), true);
 
     }
 
@@ -131,8 +129,8 @@ public class AttemptServiceImplTest {
         Assert.assertTrue(list.size() == 14);
         for (int i = 0; i < list.size(); i++) {
             Attempt attempt = list.get(i);
-            assertAttempt(attempt, i + 1, 1, "2014-11-26 17:00:00", 60000, "2014-11-26 17:39:00", 1, "test " + (i + 1),
-                          0, "2014-11-26 17:38:00", AttemptStatus.RUNNING, 1, 1, "2014-11-26 17:38:00", true);
+            assertAttempt(attempt, i + 1, 1, "2014-11-26 17:00:00", 60000, "2014-11-26 17:39:00", 1, "test " + (i + 1), 0, "2014-11-26 17:38:00",
+                    AttemptStatus.RUNNING, 1, 1, "2014-11-26 17:38:00", true);
         }
     }
 
@@ -172,10 +170,9 @@ public class AttemptServiceImplTest {
         Long id = attempt.getId();
 
         Attempt actual = this.attemptService.get(id);
-        assertAttempt(actual, id, attempt.getAgentId(), attempt.getCreateTime(), attempt.getDuration(),
-                      attempt.getEndTime(), attempt.getInstanceId(), attempt.getOutput(), attempt.getReturnValue(),
-                      attempt.getStartTime(), attempt.getStatus(), attempt.getTaskId(), attempt.getTransactionId(),
-                      attempt.getUpdateTime(), false);
+        assertAttempt(actual, id, attempt.getAgentId(), attempt.getCreateTime(), attempt.getDuration(), attempt.getEndTime(), attempt.getInstanceId(),
+                attempt.getOutput(), attempt.getReturnValue(), attempt.getStartTime(), attempt.getStatus(), attempt.getTaskId(), attempt.getTransactionId(),
+                attempt.getUpdateTime(), false);
 
     }
 
@@ -195,8 +192,8 @@ public class AttemptServiceImplTest {
         Assert.assertTrue(list.size() == 10);
         for (int i = 0; i < list.size(); i++) {
             Attempt attempt = list.get(i);
-            assertAttempt(attempt, i + 1, 1, "2014-11-26 17:00:00", 60000, "2014-11-26 17:39:00", 1, "test " + (i + 1),
-                          0, "2014-11-26 17:38:00", AttemptStatus.SUCCESS, 1, 1, sdf.format(updateTime), false);
+            assertAttempt(attempt, i + 1, 1, "2014-11-26 17:00:00", 60000, "2014-11-26 17:39:00", 1, "test " + (i + 1), 0, "2014-11-26 17:38:00",
+                    AttemptStatus.SUCCESS, 1, 1, sdf.format(updateTime), false);
         }
         Assert.assertEquals(15, paginator.getItems());
         Assert.assertEquals(2, paginator.getPages());
@@ -209,9 +206,8 @@ public class AttemptServiceImplTest {
         Assert.assertTrue(list.size() == 5);
         for (int i = 0; i < list.size(); i++) {
             Attempt attempt = list.get(i);
-            assertAttempt(attempt, i + 11, 1, "2014-11-26 17:00:00", 60000, "2014-11-26 17:39:00", 1, "test "
-                                                                                                      + (i + 11), 0,
-                          "2014-11-26 17:38:00", AttemptStatus.SUCCESS, 1, 1, sdf.format(updateTime), false);
+            assertAttempt(attempt, i + 11, 1, "2014-11-26 17:00:00", 60000, "2014-11-26 17:39:00", 1, "test " + (i + 11), 0, "2014-11-26 17:38:00",
+                    AttemptStatus.SUCCESS, 1, 1, sdf.format(updateTime), false);
         }
 
         Assert.assertEquals(15, paginator.getItems());
@@ -227,21 +223,18 @@ public class AttemptServiceImplTest {
     }
 
     private void assertAttempt(Attempt attempt, long id, boolean active) throws ParseException {
-        assertAttempt(attempt, id, 1, "2014-11-26 17:00:00", 60000, "2014-11-26 17:39:00", 1, "test " + id, 0,
-                      "2014-11-26 17:38:00", AttemptStatus.SUCCESS, 1, 1, "2014-11-26 17:38:00", active);
+        assertAttempt(attempt, id, 1, "2014-11-26 17:00:00", 60000, "2014-11-26 17:39:00", 1, "test " + id, 0, "2014-11-26 17:38:00", AttemptStatus.SUCCESS,
+                1, 1, "2014-11-26 17:38:00", active);
     }
 
-    private void assertAttempt(Attempt attempt, long id, long agentId, String createTime, long duration,
-                               String endTime, long instanceId, String output, int returnValue, String startTime,
-                               AttemptStatus status, long taskId, long transactionId, String updateTime, boolean active)
-                                                                                                                        throws ParseException {
-        assertAttempt(attempt, id, agentId, sdf.parse(createTime), duration, sdf.parse(endTime), instanceId, output,
-                      returnValue, sdf.parse(startTime), status, taskId, transactionId, sdf.parse(updateTime), active);
+    private void assertAttempt(Attempt attempt, long id, long agentId, String createTime, long duration, String endTime, long instanceId, String output, int
+            returnValue, String startTime, AttemptStatus status, long taskId, long transactionId, String updateTime, boolean active) throws ParseException {
+        assertAttempt(attempt, id, agentId, sdf.parse(createTime), duration, sdf.parse(endTime), instanceId, output, returnValue, sdf.parse(startTime),
+                status, taskId, transactionId, sdf.parse(updateTime), active);
     }
 
-    private void assertAttempt(Attempt attempt, long id, long agentId, Date createTime, long duration, Date endTime,
-                               long instanceId, String output, int returnValue, Date startTime, AttemptStatus status,
-                               long taskId, long transactionId, Date updateTime, boolean active) throws ParseException {
+    private void assertAttempt(Attempt attempt, long id, long agentId, Date createTime, long duration, Date endTime, long instanceId, String output, int
+            returnValue, Date startTime, AttemptStatus status, long taskId, long transactionId, Date updateTime, boolean active) throws ParseException {
         Assert.assertEquals(Long.valueOf(id), attempt.getId());
         Assert.assertEquals(Long.valueOf(agentId), attempt.getAgentId());
         Assert.assertTrue(TestUtils.generallyEquals(createTime, attempt.getCreateTime()));

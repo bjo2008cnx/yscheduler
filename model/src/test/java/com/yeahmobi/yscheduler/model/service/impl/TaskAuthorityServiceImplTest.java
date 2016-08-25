@@ -1,9 +1,8 @@
 package com.yeahmobi.yscheduler.model.service.impl;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import com.yeahmobi.yscheduler.model.service.TaskAuthorityService;
+import com.yeahmobi.yunit.DbUnitTestExecutionListener;
+import com.yeahmobi.yunit.annotation.DatabaseSetup;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,16 +12,16 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.yeahmobi.yscheduler.model.service.TaskAuthorityService;
-import com.yeahmobi.yunit.DbUnitTestExecutionListener;
-import com.yeahmobi.yunit.annotation.DatabaseSetup;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Leo Liang
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class TaskAuthorityServiceImplTest {
 
     @Autowired
@@ -81,9 +80,8 @@ public class TaskAuthorityServiceImplTest {
     @Test
     @DatabaseSetup
     public void testAdd() throws Exception {
-        this.taskAuthorityService.add(Arrays.asList(new Long[] { 1000L, 1001L }),
-                                      Arrays.asList(new Long[] { 2000L, 2001L }),
-                                      Arrays.asList(new Long[] { 3000L, 3001L }), 100L);
+        this.taskAuthorityService.add(Arrays.asList(new Long[]{1000L, 1001L}), Arrays.asList(new Long[]{2000L, 2001L}), Arrays.asList(new Long[]{3000L,
+                3001L}), 100L);
 
         List<Long> readonlyUsers = this.taskAuthorityService.listReadonlyUser(100);
 
@@ -119,9 +117,8 @@ public class TaskAuthorityServiceImplTest {
     @Test
     @DatabaseSetup
     public void testUpdate() throws Exception {
-        this.taskAuthorityService.update(Arrays.asList(new Long[] { 1000L, 1001L }),
-                                         Arrays.asList(new Long[] { 2000L, 2001L }),
-                                         Arrays.asList(new Long[] { 3000L, 3001L }), 6L);
+        this.taskAuthorityService.update(Arrays.asList(new Long[]{1000L, 1001L}), Arrays.asList(new Long[]{2000L, 2001L}), Arrays.asList(new Long[]{3000L,
+                3001L}), 6L);
 
         List<Long> readonlyUsers = this.taskAuthorityService.listReadonlyUser(6);
 

@@ -1,19 +1,5 @@
 package com.yeahmobi.yscheduler.model.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-
 import com.yeahmobi.yscheduler.common.Constants;
 import com.yeahmobi.yscheduler.common.Paginator;
 import com.yeahmobi.yscheduler.model.Agent;
@@ -24,23 +10,36 @@ import com.yeahmobi.yscheduler.model.type.TaskStatus;
 import com.yeahmobi.yscheduler.model.type.TaskType;
 import com.yeahmobi.yunit.DbUnitTestExecutionListener;
 import com.yeahmobi.yunit.annotation.DatabaseSetup;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Leo Liang
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class AgentServiceImplTest {
 
     @Autowired
-    private AgentService                  agentService;
+    private AgentService agentService;
 
     @Autowired
-    private TaskService                   taskService;
+    private TaskService taskService;
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static Date                   DEFAULT_TIME;
+    private static Date DEFAULT_TIME;
 
     static {
         try {
@@ -72,8 +71,7 @@ public class AgentServiceImplTest {
         assertAgent(agent, id, "agent" + id, true, true, "10.0.0." + id, DEFAULT_TIME, DEFAULT_TIME);
     }
 
-    private void assertAgent(Agent agent, Long id, String name, boolean alive, boolean enable, String ip,
-                             Date createTime, Date updateTime) {
+    private void assertAgent(Agent agent, Long id, String name, boolean alive, boolean enable, String ip, Date createTime, Date updateTime) {
         Assert.assertEquals(id, agent.getId());
         Assert.assertEquals(name, agent.getName());
         Assert.assertEquals(alive, agent.getAlive());
@@ -173,8 +171,7 @@ public class AgentServiceImplTest {
         Assert.assertEquals(id, heartbeatTask.getAgentId());
         Assert.assertEquals(Constants.HEARTBEAT_TASK_NAME_PREFIX + agent.getName(), heartbeatTask.getName());
         Assert.assertEquals("0 * * * * *", heartbeatTask.getCrontab());
-        Assert.assertEquals("curl http://127.0.0.1:8080/heartbeat/agent/active?agentId=" + agent.getId(),
-                            heartbeatTask.getCommand());
+        Assert.assertEquals("curl http://127.0.0.1:8080/heartbeat/agent/active?agentId=" + agent.getId(), heartbeatTask.getCommand());
         Assert.assertEquals(sdf.format(now), sdf.format(heartbeatTask.getCreateTime()));
         Assert.assertEquals(sdf.format(now), sdf.format(heartbeatTask.getUpdateTime()));
         Assert.assertEquals(sdf.format(now), sdf.format(heartbeatTask.getLastScheduleTime()));

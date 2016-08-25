@@ -1,8 +1,9 @@
 package com.yeahmobi.yscheduler.model.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.yeahmobi.yscheduler.model.WorkflowDetail;
+import com.yeahmobi.yscheduler.model.service.WorkflowDetailService;
+import com.yeahmobi.yscheduler.model.type.DependingStatus;
+import com.yeahmobi.yunit.DbUnitTestExecutionListener;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,17 +13,15 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.yeahmobi.yscheduler.model.WorkflowDetail;
-import com.yeahmobi.yscheduler.model.service.WorkflowDetailService;
-import com.yeahmobi.yscheduler.model.type.DependingStatus;
-import com.yeahmobi.yunit.DbUnitTestExecutionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Ryan Sun
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class WorkflowDetailServiceImplTest {
 
     @Autowired
@@ -42,8 +41,7 @@ public class WorkflowDetailServiceImplTest {
         this.workflowDetailService.save(workflowId, details, dependencyList);
         List<WorkflowDetail> actuals = this.workflowDetailService.list(workflowId);
         assertWorkflowDetailArrayEquals(details, actuals);
-        Assert.assertArrayEquals(dependencies.toArray(),
-                                 this.workflowDetailService.listDependencyTaskIds(1l, 2l).toArray());
+        Assert.assertArrayEquals(dependencies.toArray(), this.workflowDetailService.listDependencyTaskIds(1l, 2l).toArray());
 
     }
 

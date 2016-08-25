@@ -19,14 +19,14 @@ import java.util.Date;
  * @author atell
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class ScheduleProgressServiceImplTest {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
-    private ScheduleProgressService       scheduleProgressService;
+    private ScheduleProgressService scheduleProgressService;
 
     @Test
     @DatabaseSetup

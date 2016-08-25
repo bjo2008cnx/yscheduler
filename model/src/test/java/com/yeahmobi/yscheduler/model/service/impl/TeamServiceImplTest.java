@@ -34,23 +34,23 @@ import com.yeahmobi.yunit.annotation.DatabaseSetup;
  * @author Leo Liang
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class TeamServiceImplTest {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
-    private TeamService                   teamService;
+    private TeamService teamService;
 
     @Autowired
-    private TaskService                   taskService;
+    private TaskService taskService;
 
     @Autowired
-    private WorkflowService               workflowService;
+    private WorkflowService workflowService;
 
     @Autowired
-    private WorkflowDetailService         workflowDetailService;
+    private WorkflowDetailService workflowDetailService;
 
     @Autowired
     private WorkflowTaskDependencyService workflowDependencyService;

@@ -26,14 +26,14 @@ import java.util.List;
  * @author atell
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class UserServiceImplTest {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
-    private UserService                   userService;
+    private UserService userService;
 
     @Test
     @DatabaseSetup
@@ -154,8 +154,8 @@ public class UserServiceImplTest {
 
         Assert.assertNotNull(id);
         User actual = this.userService.get(id);
-        assertUser(actual, id, user.getName(), user.getPassword(), user.getEmail(), user.getTelephone(),
-                   user.getToken(), user.getTeamId(), new Date(), new Date());
+        assertUser(actual, id, user.getName(), user.getPassword(), user.getEmail(), user.getTelephone(), user.getToken(), user.getTeamId(), new Date(), new
+                Date());
 
     }
 
@@ -191,8 +191,8 @@ public class UserServiceImplTest {
         Long id = user.getId();
 
         User actual = this.userService.get(id);
-        assertUser(actual, id, user.getName(), user.getPassword(), user.getEmail(), user.getTelephone(), "token1",
-                   user.getTeamId(), user.getCreateTime(), user.getUpdateTime());
+        assertUser(actual, id, user.getName(), user.getPassword(), user.getEmail(), user.getTelephone(), "token1", user.getTeamId(), user.getCreateTime(),
+                user.getUpdateTime());
 
     }
 
@@ -250,23 +250,22 @@ public class UserServiceImplTest {
     }
 
     private void assertUser(User user, long id, long teamId) throws ParseException {
-        assertUser(user, id, "admin" + id, "21232f297a57a5a743894a0e4a801fc3", "platform@ndpmedia.com", "15921096896",
-                   "token" + id, teamId, "2014-11-26 17:00:00", "2014-11-26 17:38:00");
+        assertUser(user, id, "admin" + id, "21232f297a57a5a743894a0e4a801fc3", "platform@ndpmedia.com", "15921096896", "token" + id, teamId, "2014-11-26 " +
+                "17:00:00", "2014-11-26 17:38:00");
     }
 
     private void assertUser(User user, long id) throws ParseException {
-        assertUser(user, id, "admin" + id, "21232f297a57a5a743894a0e4a801fc3", "platform@ndpmedia.com", "15921096896",
-                   "token" + id, id, "2014-11-26 17:00:00", "2014-11-26 17:38:00");
+        assertUser(user, id, "admin" + id, "21232f297a57a5a743894a0e4a801fc3", "platform@ndpmedia.com", "15921096896", "token" + id, id, "2014-11-26 " +
+                "17:00:00", "2014-11-26 17:38:00");
     }
 
-    private void assertUser(User user, long id, String name, String password, String email, String telephone,
-                            String token, Long teamId, String createTime, String updateTime) throws ParseException {
-        assertUser(user, id, name, password, email, telephone, token, teamId, sdf.parse(createTime),
-                   sdf.parse(updateTime));
+    private void assertUser(User user, long id, String name, String password, String email, String telephone, String token, Long teamId, String createTime,
+                            String updateTime) throws ParseException {
+        assertUser(user, id, name, password, email, telephone, token, teamId, sdf.parse(createTime), sdf.parse(updateTime));
     }
 
-    private void assertUser(User user, long id, String name, String password, String email, String telephone,
-                            String token, Long teamId, Date createTime, Date updateTime) throws ParseException {
+    private void assertUser(User user, long id, String name, String password, String email, String telephone, String token, Long teamId, Date createTime,
+                            Date updateTime) throws ParseException {
         Assert.assertEquals(Long.valueOf(id), user.getId());
         Assert.assertEquals(name, user.getName());
         Assert.assertEquals(password, user.getPassword());

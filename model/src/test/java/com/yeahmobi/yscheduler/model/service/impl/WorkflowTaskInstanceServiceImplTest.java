@@ -18,8 +18,8 @@ import com.yeahmobi.yunit.annotation.DatabaseSetup;
  * Ryan Sun
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class WorkflowTaskInstanceServiceImplTest {
 
     @Autowired

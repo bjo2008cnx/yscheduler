@@ -1,19 +1,5 @@
 package com.yeahmobi.yscheduler.model.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-
 import com.yeahmobi.yscheduler.common.Constants;
 import com.yeahmobi.yscheduler.common.Paginator;
 import com.yeahmobi.yscheduler.model.Agent;
@@ -26,20 +12,33 @@ import com.yeahmobi.yscheduler.model.type.TaskStatus;
 import com.yeahmobi.yscheduler.model.type.TaskType;
 import com.yeahmobi.yunit.DbUnitTestExecutionListener;
 import com.yeahmobi.yunit.annotation.DatabaseSetup;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Leo Liang
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = {"classpath:applicationContext-test.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class TaskServiceImplTest {
 
     @Autowired
-    private TaskService                   taskService;
+    private TaskService taskService;
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static Date                   DEFAULT_TIME;
+    private static Date DEFAULT_TIME;
 
     static {
         try {
@@ -136,9 +135,8 @@ public class TaskServiceImplTest {
 
         Assert.assertNotNull(id);
         Task actual = this.taskService.get(id);
-        assertTask(actual, id, task.getAgentId(), task.getName(), task.getCommand(), nowTime, nowTime,
-                   task.getCrontab(), task.getDescription(), nowTime, task.getOwner(), task.getRetryTimes(),
-                   task.getStatus(), task.getTimeout(), task.getType(), false, DependingStatus.NONE);
+        assertTask(actual, id, task.getAgentId(), task.getName(), task.getCommand(), nowTime, nowTime, task.getCrontab(), task.getDescription(), nowTime,
+                task.getOwner(), task.getRetryTimes(), task.getStatus(), task.getTimeout(), task.getType(), false, DependingStatus.NONE);
 
     }
 
@@ -162,22 +160,19 @@ public class TaskServiceImplTest {
         Date nowTime = new Date();
 
         Task actual = this.taskService.get(15L);
-        assertTask(actual, 15L, task.getAgentId(), task.getName(), task.getCommand(), DEFAULT_TIME, nowTime,
-                   task.getCrontab(), task.getDescription(), nowTime, task.getOwner(), task.getRetryTimes(),
-                   task.getStatus(), task.getTimeout(), task.getType(), true, DependingStatus.NONE);
+        assertTask(actual, 15L, task.getAgentId(), task.getName(), task.getCommand(), DEFAULT_TIME, nowTime, task.getCrontab(), task.getDescription(),
+                nowTime, task.getOwner(), task.getRetryTimes(), task.getStatus(), task.getTimeout(), task.getType(), true, DependingStatus.NONE);
         task.setAgentId(1l);
         this.taskService.updateAgentId(15l, 1l);
         actual = this.taskService.get(15L);
-        assertTask(actual, 15L, task.getAgentId(), task.getName(), task.getCommand(), DEFAULT_TIME, nowTime,
-                   task.getCrontab(), task.getDescription(), nowTime, task.getOwner(), task.getRetryTimes(),
-                   task.getStatus(), task.getTimeout(), task.getType(), true, DependingStatus.NONE);
+        assertTask(actual, 15L, task.getAgentId(), task.getName(), task.getCommand(), DEFAULT_TIME, nowTime, task.getCrontab(), task.getDescription(),
+                nowTime, task.getOwner(), task.getRetryTimes(), task.getStatus(), task.getTimeout(), task.getType(), true, DependingStatus.NONE);
         task.setAttachment("attachment");
         task.setAttachmentVersion(1l);
         this.taskService.updateAttachment(15l, "attachment", 1l);
         actual = this.taskService.get(15L);
-        assertTask(actual, 15L, task.getAgentId(), task.getName(), task.getCommand(), DEFAULT_TIME, nowTime,
-                   task.getCrontab(), task.getDescription(), nowTime, task.getOwner(), task.getRetryTimes(),
-                   task.getStatus(), task.getTimeout(), task.getType(), true, DependingStatus.NONE);
+        assertTask(actual, 15L, task.getAgentId(), task.getName(), task.getCommand(), DEFAULT_TIME, nowTime, task.getCrontab(), task.getDescription(),
+                nowTime, task.getOwner(), task.getRetryTimes(), task.getStatus(), task.getTimeout(), task.getType(), true, DependingStatus.NONE);
 
     }
 
@@ -201,9 +196,8 @@ public class TaskServiceImplTest {
         Date nowTime = new Date();
 
         Task actual = this.taskService.get(15L);
-        assertTask(actual, 15L, task.getAgentId(), task.getName(), task.getCommand(), DEFAULT_TIME, nowTime,
-                   task.getCrontab(), task.getDescription(), nowTime, task.getOwner(), task.getRetryTimes(),
-                   task.getStatus(), task.getTimeout(), task.getType(), true, DependingStatus.NONE);
+        assertTask(actual, 15L, task.getAgentId(), task.getName(), task.getCommand(), DEFAULT_TIME, nowTime, task.getCrontab(), task.getDescription(),
+                nowTime, task.getOwner(), task.getRetryTimes(), task.getStatus(), task.getTimeout(), task.getType(), true, DependingStatus.NONE);
     }
 
     @Test
@@ -247,10 +241,9 @@ public class TaskServiceImplTest {
         this.taskService.updateLastScheduleTime(1L, now);
 
         Task newTask = this.taskService.get(1L);
-        assertTask(newTask, 1L, oldTask.getAgentId(), oldTask.getName(), oldTask.getCommand(), oldTask.getCreateTime(),
-                   oldTask.getUpdateTime(), oldTask.getCrontab(), oldTask.getDescription(), now, oldTask.getOwner(),
-                   oldTask.getRetryTimes(), oldTask.getStatus(), oldTask.getTimeout(), oldTask.getType(), true,
-                   DependingStatus.NONE);
+        assertTask(newTask, 1L, oldTask.getAgentId(), oldTask.getName(), oldTask.getCommand(), oldTask.getCreateTime(), oldTask.getUpdateTime(), oldTask
+                .getCrontab(), oldTask.getDescription(), now, oldTask.getOwner(), oldTask.getRetryTimes(), oldTask.getStatus(), oldTask.getTimeout(), oldTask
+                .getType(), true, DependingStatus.NONE);
     }
 
     @Test
@@ -272,10 +265,9 @@ public class TaskServiceImplTest {
         Date nowTime = new Date();
         Assert.assertEquals(1, heartbeatTasks.size());
         Task heartbeatTask = heartbeatTasks.get(0);
-        assertTask(heartbeatTask, heartbeatTask.getId(), 100L, Constants.HEARTBEAT_TASK_NAME_PREFIX + agent.getName(),
-                   "curl http://127.0.0.1:8080/heartbeat/agent/active?agentId=" + agent.getId(), nowTime, nowTime,
-                   "0 * * * * *", "Hearbeat task for agent test100", nowTime, 2L, 5, TaskStatus.OPEN, 1,
-                   TaskType.SHELL, true, DependingStatus.NONE);
+        assertTask(heartbeatTask, heartbeatTask.getId(), 100L, Constants.HEARTBEAT_TASK_NAME_PREFIX + agent.getName(), "curl http://127.0.0" +
+                ".1:8080/heartbeat/agent/active?agentId=" + agent.getId(), nowTime, nowTime, "0 * * * * *", "Hearbeat task for agent test100", nowTime, 2L,
+                5, TaskStatus.OPEN, 1, TaskType.SHELL, true, DependingStatus.NONE);
     }
 
     @Test
@@ -338,14 +330,12 @@ public class TaskServiceImplTest {
     }
 
     private void assertTask(Task task, long id, long owner) {
-        assertTask(task, id, 1, "test" + id, "echo test" + id, DEFAULT_TIME, DEFAULT_TIME, "0/5 * * * * ?", "desc..."
-                                                                                                            + id,
-                   DEFAULT_TIME, owner, 1, TaskStatus.OPEN, 1, TaskType.SHELL, true, DependingStatus.NONE);
+        assertTask(task, id, 1, "test" + id, "echo test" + id, DEFAULT_TIME, DEFAULT_TIME, "0/5 * * * * ?", "desc..." + id, DEFAULT_TIME, owner, 1,
+                TaskStatus.OPEN, 1, TaskType.SHELL, true, DependingStatus.NONE);
     }
 
-    private void assertTask(Task task, long id, long agentId, String name, String command, Date createTime,
-                            Date updateTime, String crontab, String desc, Date lastScheduleTime, long owner,
-                            Integer retryTimes, TaskStatus status, Integer timeout, TaskType type, Boolean canSkip,
+    private void assertTask(Task task, long id, long agentId, String name, String command, Date createTime, Date updateTime, String crontab, String desc,
+                            Date lastScheduleTime, long owner, Integer retryTimes, TaskStatus status, Integer timeout, TaskType type, Boolean canSkip,
                             DependingStatus dependingStatus) {
         Assert.assertEquals(Long.valueOf(id), task.getId());
         Assert.assertEquals(Long.valueOf(agentId), task.getAgentId());
