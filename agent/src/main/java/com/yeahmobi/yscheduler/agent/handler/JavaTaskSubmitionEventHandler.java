@@ -1,13 +1,12 @@
 package com.yeahmobi.yscheduler.agent.handler;
 
-import java.util.Map;
-
+import com.yeahmobi.yscheduler.agentframework.agent.event.handler.TaskSubmitionEventHandler;
+import com.yeahmobi.yscheduler.agentframework.agent.task.agenttask.AgentTask;
+import com.yeahmobi.yscheduler.common.Constants;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
-import com.yeahmobi.yscheduler.agentframework.agent.event.TaskSubmitionEventHandler;
-import com.yeahmobi.yscheduler.agentframework.agent.task.AgentTask;
-import com.yeahmobi.yscheduler.common.Constants;
+import java.util.Map;
 
 public class JavaTaskSubmitionEventHandler extends TaskSubmitionEventHandler {
 

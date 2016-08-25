@@ -1,8 +1,8 @@
 package com.yeahmobi.yscheduler.agent.handler.java;
 
 import com.yeahmobi.yscheduler.agent.handler.JavaTaskHandler;
-import com.yeahmobi.yscheduler.agentframework.agent.task.BaseTaskExecutor;
-import com.yeahmobi.yscheduler.agentframework.agent.task.TaskTransaction;
+import com.yeahmobi.yscheduler.agentframework.agent.task.executor.BaseTaskExecutor;
+import com.yeahmobi.yscheduler.agentframework.agent.task.transaction.TaskTransaction;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;

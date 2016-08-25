@@ -1,8 +1,8 @@
 package com.yeahmobi.yscheduler.model.service.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.yeahmobi.yscheduler.model.service.ScheduleProgressService;
+import com.yeahmobi.yunit.DbUnitTestExecutionListener;
+import com.yeahmobi.yunit.annotation.DatabaseSetup;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,9 +12,8 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.yeahmobi.yscheduler.model.service.ScheduleProgressService;
-import com.yeahmobi.yunit.DbUnitTestExecutionListener;
-import com.yeahmobi.yunit.annotation.DatabaseSetup;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author atell

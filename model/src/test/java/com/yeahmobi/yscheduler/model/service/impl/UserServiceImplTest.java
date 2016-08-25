@@ -1,10 +1,12 @@
 package com.yeahmobi.yscheduler.model.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
+import com.yeahmobi.yscheduler.common.Paginator;
+import com.yeahmobi.yscheduler.common.PasswordEncoder;
+import com.yeahmobi.yscheduler.model.User;
+import com.yeahmobi.yscheduler.model.common.NameValuePair;
+import com.yeahmobi.yscheduler.model.service.UserService;
+import com.yeahmobi.yunit.DbUnitTestExecutionListener;
+import com.yeahmobi.yunit.annotation.DatabaseSetup;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,13 +17,10 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.yeahmobi.yscheduler.common.Paginator;
-import com.yeahmobi.yscheduler.common.PasswordEncoder;
-import com.yeahmobi.yscheduler.model.User;
-import com.yeahmobi.yscheduler.model.common.NameValuePair;
-import com.yeahmobi.yscheduler.model.service.UserService;
-import com.yeahmobi.yunit.DbUnitTestExecutionListener;
-import com.yeahmobi.yunit.annotation.DatabaseSetup;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author atell
@@ -239,7 +238,7 @@ public class UserServiceImplTest {
 
         Assert.assertTrue(TestUtils.generallyEquals(new Date(), actual.getUpdateTime()));
         Assert.assertTrue(StringUtils.isNotBlank(actual.getToken()));
-        Assert.assertNotEquals("token1", actual.getToken());
+        Assert.assertNotSame("token1", actual.getToken());
 
     }
 

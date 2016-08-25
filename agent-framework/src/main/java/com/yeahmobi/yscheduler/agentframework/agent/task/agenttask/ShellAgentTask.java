@@ -1,8 +1,8 @@
 package com.yeahmobi.yscheduler.agentframework.agent.task.agenttask;
 
+import com.yeahmobi.yscheduler.agentframework.agent.task.executor.TaskExecutor;
 import lombok.Data;
 import org.apache.commons.lang.Validate;
-import org.springframework.core.task.TaskExecutor;
 
 import java.util.Map;
 

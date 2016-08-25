@@ -1,16 +1,16 @@
 package com.yeahmobi.yscheduler.agent.handler.sample;
 
-import java.util.Map;
-
+import com.yeahmobi.yscheduler.agentframework.agent.event.handler.TaskSubmitionEventHandler;
+import com.yeahmobi.yscheduler.agentframework.agent.task.agenttask.AbstractAgentTask;
+import com.yeahmobi.yscheduler.agentframework.agent.task.agenttask.AgentTask;
+import com.yeahmobi.yscheduler.agentframework.agent.task.executor.BaseTaskExecutor;
+import com.yeahmobi.yscheduler.agentframework.agent.task.executor.TaskExecutor;
+import com.yeahmobi.yscheduler.agentframework.agent.task.transaction.TaskTransaction;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
-import com.yeahmobi.yscheduler.agentframework.agent.event.TaskSubmitionEventHandler;
-import com.yeahmobi.yscheduler.agentframework.agent.task.AbstractAgentTask;
-import com.yeahmobi.yscheduler.agentframework.agent.task.AgentTask;
-import com.yeahmobi.yscheduler.agentframework.agent.task.BaseTaskExecutor;
-import com.yeahmobi.yscheduler.agentframework.agent.task.TaskExecutor;
-import com.yeahmobi.yscheduler.agentframework.agent.task.TaskTransaction;
+import java.util.Map;
+
 
 /**
  * @author Leo.Liang
@@ -44,9 +44,9 @@ public class ExecuteJavaTaskSampleEventHandler extends TaskSubmitionEventHandler
 
     private static final class ExecuteJavaTaskSampleTaskExecutor extends BaseTaskExecutor {
 
-        private volatile boolean cancel  = false;
-        private int              times;
-        private final String     padding = "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
+        private volatile boolean cancel = false;
+        private int times;
+        private final String padding = "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
 
         public ExecuteJavaTaskSampleTaskExecutor(int times) {
             this.times = times;
