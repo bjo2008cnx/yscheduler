@@ -1,0 +1,3 @@
+运行任务：     TaskListController.trigger
+重新运行任务： TaskInstanceController.rerun
+取消任务：     TaskInstanceController.cancel
